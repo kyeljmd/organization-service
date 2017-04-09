@@ -2,6 +2,7 @@ package com.kyeljmd.microservices.config;
 
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.context.annotation.Primary;
 import org.springframework.security.oauth2.provider.token.DefaultTokenServices;
 import org.springframework.security.oauth2.provider.token.TokenEnhancer;
 import org.springframework.security.oauth2.provider.token.TokenStore;
@@ -11,6 +12,7 @@ import org.springframework.security.oauth2.provider.token.store.JwtTokenStore;
 /**
  * Created by kyel on 4/9/2017.
  */
+
 @Configuration
 public class JWTTokenStoreConfig {
 
@@ -20,10 +22,9 @@ public class JWTTokenStoreConfig {
     }
 
     @Bean
+    @Primary
     public DefaultTokenServices tokenServices() {
-        DefaultTokenServices defaultTokenServices =
-                new DefaultTokenServices();
-
+        DefaultTokenServices defaultTokenServices = new DefaultTokenServices();
         defaultTokenServices.setTokenStore(tokenStore());
         defaultTokenServices.setSupportRefreshToken(true);
         return defaultTokenServices;
@@ -32,7 +33,7 @@ public class JWTTokenStoreConfig {
     @Bean
     public JwtAccessTokenConverter jwtAccessTokenConverter() {
         JwtAccessTokenConverter converter = new JwtAccessTokenConverter();
-        converter.setSigningKey("345345fsdgsf5345”");
+        converter.setSigningKey("345345fsdgsf5345");
         return converter;
     }
 }
